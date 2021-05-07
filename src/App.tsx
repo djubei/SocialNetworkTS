@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Route} from 'react-router-dom';
 import './App.css';
+import {Header} from "./Components/Header/header-ui/Header";
+import {Navbar} from "./Components/Navbar/navbar-ui/Navbar";
+import {Profile} from './Components/Profile/profile-ui/Profile';
+import {Messages} from "./Components/Messages/messages-ui/Messages";
+import {Settings} from "./Components/Settings/settings-ui/Settings";
+import {Music} from "./Components/Music/music-ui/Music";
+import {News} from "./Components/News/news-ui/News";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+export const App = () =>
+    <div className={'app-wrapper'}>
+        <Header/>
+        <Navbar/>
+        <div className={'app-wrapper-content'}>
+            <Route path={'/profile'} render={() => <Profile/>}/>
+            <Route path={'/messages'} render={() => <Messages/>}/>
+            <Route path={'/settings'} render={() => <Settings/>}/>
+            <Route path={'/music'} render={() => <Music/>}/>
+            <Route path={'/news'} render={() => <News/>}/>
+        </div>
     </div>
-  );
-}
-
-export default App;

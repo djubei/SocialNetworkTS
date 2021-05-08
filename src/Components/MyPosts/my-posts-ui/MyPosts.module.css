@@ -1,0 +1,15 @@
+
+.item {
+    color: #aa6c10;
+}
+
+.btn {
+    margin-top: -4px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.txt {
+    margin-bottom: -4px;
+    display: block;
+}

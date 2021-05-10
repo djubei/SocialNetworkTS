@@ -6,7 +6,7 @@ export const Navbar = () => {
     return (
         <div className={s.nav}>
             <div className={s.item}><NavLink activeClassName={s.activeClassLink} to={'/profile'}>Profile</NavLink></div>
-            <div className={s.item}><NavLink activeClassName={s.activeClassLink} to={'/messages'}>Messages</NavLink>
+            <div className={s.item}><NavLink activeClassName={s.activeClassLink} to={'/dialogs'}>Messages</NavLink>
             </div>
             <div className={s.item}><NavLink activeClassName={s.activeClassLink} to={'/news'}>News</NavLink></div>
             <div className={s.item}><NavLink activeClassName={s.activeClassLink} to={'/music'}>Music</NavLink></div>

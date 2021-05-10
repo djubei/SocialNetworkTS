@@ -1,0 +1,25 @@
+
+.dialogs {
+    display: grid;
+    grid-template-columns:2fr 10fr;
+}
+
+.dialogsItems {
+    margin-left: 6px;
+    margin-top: 6px;
+}
+.dialogsItems .active{
+    color: goldenrod;
+}
+.dialog {
+}
+
+
+.messages {
+    margin-left: 6px;
+    margin-top: 6px;
+}
+
+.message {
+}
+

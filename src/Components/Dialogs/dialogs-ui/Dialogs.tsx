@@ -1,6 +1,7 @@
 import React from "react";
-import {NavLink} from "react-router-dom";
 import s from './Dialogs.module.css'
+import {DialogItem} from "../../DialogItem/dialogItem-ui/DialogItem";
+import {Message} from "../../Message/message-ui/Message";
 
 
 export const Dialogs = () => {
@@ -8,17 +9,18 @@ export const Dialogs = () => {
 
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <div className={`${s.dialog} ${s.active}`}><NavLink to={'/dialogs/1'}>Dimich</NavLink></div>
-                <div className={`${s.dialog} ${s.active}`}><NavLink to={'/dialogs/2'}>Sveta</NavLink></div>
-                <div className={`${s.dialog} ${s.active}`}><NavLink to={'/dialogs/3'}>Valera</NavLink></div>
-                <div className={`${s.dialog} ${s.active}`}><NavLink to={'/dialogs/4'}>Viktor</NavLink></div>
-                <div className={`${s.dialog} ${s.active}`}><NavLink to={'/dialogs/5'}>Ignat</NavLink></div>
-                <div className={`${s.dialog} ${s.active}`}><NavLink to={'/dialogs/6'}>Eugeny</NavLink></div>
+                <DialogItem id={1} name={'Dimich'}/>
+                <DialogItem id={2} name={'Sveta'}/>
+                <DialogItem id={3} name={'Viktor'}/>
+                <DialogItem id={4} name={'Ignat'}/>
+                <DialogItem id={5} name={'Valera'}/>
+                <DialogItem id={6} name={'Sasha'}/>
+                <DialogItem id={7} name={'Eugene'}/>
             </div>
             <div className={s.messages}>
-                <div className={s.message}>Hi</div>
-                <div className={s.message}>Bye</div>
-                <div className={s.message}>Ok</div>
+                <Message message={'hi'}/>
+                <Message message={'bye'}/>
+                <Message message={'ok'}/>
             </div>
         </div>
     )

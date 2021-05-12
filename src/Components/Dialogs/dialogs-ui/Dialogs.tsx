@@ -5,22 +5,33 @@ import {Message} from "../../Message/message-ui/Message";
 
 
 export const Dialogs = () => {
+
+    let messageData = [
+        {id: 1, message: 'hi'},
+        {id: 2, message: 'bye'},
+        {id: 3, message: 'yo'},
+        {id: 4, message: 'how are u'},
+        {id: 5, message: 'ok'}
+    ]
+
+    let dialogsData = [
+        {id: 1, name: 'Dimich'},
+        {id: 2, name: 'Sveta'},
+        {id: 3, name: 'Viktor'},
+        {id: 4, name: 'Ignat'},
+        {id: 5, name: 'Valera'},
+        {id: 6, name: 'Sasha'},
+        {id: 7, name: 'Eugene'},
+    ]
+
     return (
 
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem id={1} name={'Dimich'}/>
-                <DialogItem id={2} name={'Sveta'}/>
-                <DialogItem id={3} name={'Viktor'}/>
-                <DialogItem id={4} name={'Ignat'}/>
-                <DialogItem id={5} name={'Valera'}/>
-                <DialogItem id={6} name={'Sasha'}/>
-                <DialogItem id={7} name={'Eugene'}/>
+                {dialogsData.map(t => <DialogItem id={t.id} name={t.name}/>)}
             </div>
             <div className={s.messages}>
-                <Message message={'hi'}/>
-                <Message message={'bye'}/>
-                <Message message={'ok'}/>
+                {messageData.map(t => <Message id={t.id} message={t.message}/>)}
             </div>
         </div>
     )

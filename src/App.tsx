@@ -8,24 +8,36 @@ import {Settings} from "./Components/Settings/settings-ui/Settings";
 import {Music} from "./Components/Music/music-ui/Music";
 import {News} from "./Components/News/news-ui/News";
 import {Dialogs} from "./Components/Dialogs/dialogs-ui/Dialogs";
-import {DialogItemPropsType, MessagePropsType, PostsPropsType} from "./index";
+import {DialogItemPropsType, MessagePropsType, PostsPropsType} from "./redux/state";
 
 
 type AppPropsType = {
-    dialogs: Array<DialogItemPropsType>
-    messages: Array<MessagePropsType>
-    posts: Array<PostsPropsType>
+    state: {
+        profilePage: {
+            posts: Array<PostsPropsType>
+
+        }
+        dialogsPage: {
+            messages: MessagePropsType[]
+            dialogs: DialogItemPropsType[]
+        }
+    }
 }
 
-export const App = (props: AppPropsType) =>
-    <div className={'app-wrapper'}>
-        <Header/>
-        <Navbar/>
-        <div className={'app-wrapper-content'}>
-            <Route path={'/profile'} render={() => <Profile posts={props.posts}/>}/>
-            <Route /*exact*/ path={'/dialogs'} render={() => <Dialogs messages={props.messages} dialogs={props.dialogs}/>}/>
-            <Route path={'/settings'} render={() => <Settings/>}/>
-            <Route path={'/music'} render={() => <Music/>}/>
-            <Route path={'/news'} render={() => <News/>}/>
+export const App = (props: AppPropsType) => {
+console.log(props.state)
+    return (
+        <div className={'app-wrapper'}>
+            <Header/>
+            <Navbar/>
+            <div className={'app-wrapper-content'}>
+                <Route path={'/profile'} render={() => <Profile state={props.state.profilePage}/>}/>
+                <Route /*exact*/ path={'/dialogs'}
+                                 render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                <Route path={'/settings'} render={() => <Settings/>}/>
+                <Route path={'/music'} render={() => <Music/>}/>
+                <Route path={'/news'} render={() => <News/>}/>
+            </div>
         </div>
-    </div>
+    )
+}

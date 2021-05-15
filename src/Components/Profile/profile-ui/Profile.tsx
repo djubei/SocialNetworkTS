@@ -1,17 +1,19 @@
 import React from "react";
 import {MyPosts} from "../../MyPosts/my-posts-ui/MyPosts";
 import {ProfileInfo} from "../../ProfileInfo/profileInfo-ui/ProfileInfo";
-import {PostsPropsType} from "../../../index";
+import {PostsPropsType} from "../../../redux/state";
 
 type ProfilePropsType = {
-    posts: Array<PostsPropsType>
+    state: {
+        posts: PostsPropsType[]
+    }
 }
-
-export const Profile = (props:ProfilePropsType) => {
+export const Profile = (props: ProfilePropsType) => {
+console.log(props)
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={props.state.posts}/>
         </div>
     )
 }

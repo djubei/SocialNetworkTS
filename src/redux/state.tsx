@@ -1,4 +1,6 @@
-import {reRender} from "../render";
+
+let reRender=()=>{
+}
 
 
 export type MessagePropsType = {
@@ -39,10 +41,8 @@ export let state: StateType = {
             {id: 1, message: 'hi', likes: 12},
             {id: 2, message: 'lalala', likes: 13},
             {id: 3, message: 'tralala', likes: 14},
-            {id: 4, message: 'pampampam', likes: 15},
-            {id: 5, message: 'parampampam', likes: 16},
-            {id: 6, message: 'bombom', likes: 17},
-            {id: 7, message: 'france', likes: 999},
+            {id: 4, message: 'bombom', likes: 17},
+            {id: 5, message: 'france', likes: 999},
         ],
         newPostText: 'it-kamasutra.com'
 
@@ -77,13 +77,13 @@ export let addPost = (postText: any) => {
         likes: 0
     }]
     state.profilePage.newPostText = ''
-    reRender(state)
+    reRender()
 
 }
 
 export let changePostText = (postText: string) => {
     state.profilePage.newPostText = postText
-    reRender(state)
+    reRender()
     console.log(state.profilePage.newPostText)
 }
 
@@ -95,11 +95,15 @@ export let addNewMessage = () => {
             message: state.dialogsPage.newMessageText
         }]
     state.dialogsPage.newMessageText = ''
-    reRender(state)
+    reRender()
 
 }
 
 export let onChangeMessageText = (messageText: string) => {
     state.dialogsPage.newMessageText = messageText
-    reRender(state)
+    reRender()
+}
+
+export const subscribe=(observer:any)=>{
+reRender=observer
 }

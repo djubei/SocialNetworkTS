@@ -1,3 +1,6 @@
+import {reRender} from "../render";
+
+
 export type MessagePropsType = {
     id: number
     message: string
@@ -19,11 +22,13 @@ export type PostsPropsType = {
 export type StateType = {
     profilePage: {
         posts: Array<PostsPropsType>
+        newPostText: string
 
     }
     dialogsPage: {
         messages: MessagePropsType[]
         dialogs: DialogItemPropsType[]
+        newMessageText: string
     }
 }
 
@@ -39,6 +44,7 @@ export let state: StateType = {
             {id: 6, message: 'bombom', likes: 17},
             {id: 7, message: 'france', likes: 999},
         ],
+        newPostText: 'it-kamasutra.com'
 
     },
     dialogsPage: {
@@ -57,6 +63,43 @@ export let state: StateType = {
             {id: 5, name: 'Valera'},
             {id: 6, name: 'Sasha'},
             {id: 7, name: 'Eugene'},
-        ]
+        ],
+        newMessageText: 'ok'
     }
+}
+
+
+export let addPost = (postText: any) => {
+
+    state.profilePage.posts = [...state.profilePage.posts, {
+        id: state.profilePage.posts[state.profilePage.posts.length - 1].id + 1,
+        message: postText,
+        likes: 0
+    }]
+    state.profilePage.newPostText = ''
+    reRender(state)
+
+}
+
+export let changePostText = (postText: string) => {
+    state.profilePage.newPostText = postText
+    reRender(state)
+    console.log(state.profilePage.newPostText)
+}
+
+
+export let addNewMessage = () => {
+    state.dialogsPage.messages = [...state.dialogsPage.messages,
+        {
+            id: state.dialogsPage.messages[state.dialogsPage.messages.length - 1].id + 1,
+            message: state.dialogsPage.newMessageText
+        }]
+    state.dialogsPage.newMessageText = ''
+    reRender(state)
+
+}
+
+export let onChangeMessageText = (messageText: string) => {
+    state.dialogsPage.newMessageText = messageText
+    reRender(state)
 }

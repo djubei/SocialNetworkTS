@@ -8,32 +8,39 @@ import {Settings} from "./Components/Settings/settings-ui/Settings";
 import {Music} from "./Components/Music/music-ui/Music";
 import {News} from "./Components/News/news-ui/News";
 import {Dialogs} from "./Components/Dialogs/dialogs-ui/Dialogs";
-import {DialogItemPropsType, MessagePropsType, PostsPropsType} from "./redux/state";
+import {DialogItemPropsType, MessagePropsType, onChangeMessageText, PostsPropsType} from "./redux/state";
 
 
 type AppPropsType = {
     state: {
         profilePage: {
             posts: Array<PostsPropsType>
+            newPostText:string
 
         }
         dialogsPage: {
             messages: MessagePropsType[]
             dialogs: DialogItemPropsType[]
+            newMessageText:string
         }
     }
+    addPost:(postText:any)=>void
+    changePostText:(postText:string)=>void
+    addNewMessage:()=>void
+    onChangeMessageText:(messageText:string)=>void
 }
 
 export const App = (props: AppPropsType) => {
 console.log(props.state)
+
     return (
         <div className={'app-wrapper'}>
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-                <Route path={'/profile'} render={() => <Profile state={props.state.profilePage}/>}/>
+                <Route path={'/profile'} render={() => <Profile profilePage={props.state.profilePage} changePostText={props.changePostText}  addPost={props.addPost}/>}/>
                 <Route /*exact*/ path={'/dialogs'}
-                                 render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                                 render={() => <Dialogs   onChangeMessageText={props.onChangeMessageText} addNewMessage={props.addNewMessage} state={props.state.dialogsPage}/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/news'} render={() => <News/>}/>

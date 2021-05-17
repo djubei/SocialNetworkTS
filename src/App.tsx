@@ -8,7 +8,7 @@ import {Settings} from "./Components/Settings/settings-ui/Settings";
 import {Music} from "./Components/Music/music-ui/Music";
 import {News} from "./Components/News/news-ui/News";
 import {Dialogs} from "./Components/Dialogs/dialogs-ui/Dialogs";
-import {DialogItemPropsType, MessagePropsType, onChangeMessageText, PostsPropsType} from "./redux/state";
+import {DialogItemPropsType, MessagePropsType, PostsPropsType} from "./redux/state";
 
 
 type AppPropsType = {
@@ -31,8 +31,6 @@ type AppPropsType = {
 }
 
 export const App = (props: AppPropsType) => {
-console.log(props.state)
-
     return (
         <div className={'app-wrapper'}>
             <Header/>

@@ -61,7 +61,7 @@ export let store = {
             newMessageText: 'ok'
         }
     } as StateType,
-    getState (){
+    getState() {
         return this._state
     },
     _callSubscriber() {
@@ -70,7 +70,7 @@ export let store = {
     subscribe(observer: any) {
         this._callSubscriber = observer
     },
-    addPost(postText: any) {
+    /*addPost(postText: any) {
         this._state.profilePage.posts = [...this._state.profilePage.posts, {
             id: this._state.profilePage.posts[this._state.profilePage.posts.length - 1].id + 1,
             message: postText,
@@ -78,31 +78,97 @@ export let store = {
         }]
         this._state.profilePage.newPostText = ''
         this._callSubscriber()
-    },
-    changePostText(postText: string) {
+    },*/
+    /*changePostText(postText: string) {
         this._state.profilePage.newPostText = postText
         this._callSubscriber()
         console.log(this._state.profilePage.newPostText)
-    },
-    addNewMessage() {
-        this._state.dialogsPage.messages = [...this._state.dialogsPage.messages,
-            {
-                id: this._state.dialogsPage.messages[this._state.dialogsPage.messages.length - 1].id + 1,
-                message: this._state.dialogsPage.newMessageText
-            }]
-        this._state.dialogsPage.newMessageText = ''
-        this._callSubscriber()
+    },*/
+    /* addNewMessage() {
+         this._state.dialogsPage.messages = [...this._state.dialogsPage.messages,
+             {
+                 id: this._state.dialogsPage.messages[this._state.dialogsPage.messages.length - 1].id + 1,
+                 message: this._state.dialogsPage.newMessageText
+             }]
+         this._state.dialogsPage.newMessageText = ''
+         this._callSubscriber()
 
-    },
-    onChangeMessageText(messageText: string) {
-        this._state.dialogsPage.newMessageText = messageText
-        this._callSubscriber()
-    },
+     },*/
+    /*  onChangeMessageText(messageText: string) {
+          this._state.dialogsPage.newMessageText = messageText
+          this._callSubscriber()
+      },*/
+    dispatch(action: ActionType) {
+        switch (action.type) {
+            case 'ADD-POST':
+                this._state.profilePage.posts = [...this._state.profilePage.posts, {
+                    id: this._state.profilePage.posts[this._state.profilePage.posts.length - 1].id + 1,
+                    message: action.postText,
+                    likes: 0
+                }]
+                this._state.profilePage.newPostText = ''
+                this._callSubscriber()
+                break;
+            case 'CHANGE-POST-TEXT':
+                this._state.profilePage.newPostText = action.postText
+                this._callSubscriber()
+                break;
+            case 'ADD-NEW-MESSAGE':
+                this._state.dialogsPage.messages = [...this._state.dialogsPage.messages,
+                    {
+                        id: this._state.dialogsPage.messages[this._state.dialogsPage.messages.length - 1].id + 1,
+                        message: this._state.dialogsPage.newMessageText
+                    }]
+                this._state.dialogsPage.newMessageText = ''
+                this._callSubscriber()
+                break;
+            case 'ON-CHANGE-MESSAGE-TEXT':
+                this._state.dialogsPage.newMessageText = action.newMessageText
+                this._callSubscriber()
+                break;
+        }
+    }
 }
+
+export const addPostAC = (postText: any) => {
+    return {
+        type: 'ADD-POST',
+        postText
+    } as const
+}
+export const changePostTextAC = (postText: any) => {
+    return {
+        type: 'CHANGE-POST-TEXT',
+        postText
+    } as const
+}
+export const addNewMessageAC = () => {
+    return {
+        type: 'ADD-NEW-MESSAGE',
+    } as const
+}
+export const onChangeMessageTextAc = (newMessageText: any) => {
+    return {
+        type: 'ON-CHANGE-MESSAGE-TEXT',
+        newMessageText
+    } as const
+}
+export type addPostACType = ReturnType<typeof addPostAC>
+export type changePostTextACType = ReturnType<typeof changePostTextAC>
+export type addNewMessageACType = ReturnType<typeof addNewMessageAC>
+export type onChangeMessageTextAcType = ReturnType<typeof onChangeMessageTextAc>
+
+
+export type ActionType =
+    | addPostACType
+    | changePostTextACType
+    | addNewMessageACType
+    | onChangeMessageTextAcType
 
 
 //@ts-ignore
-window.store = store
+window.store
+    = store
 
 
 

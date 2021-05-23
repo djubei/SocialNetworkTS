@@ -6,17 +6,14 @@ import {App} from "./App";
 import {BrowserRouter} from "react-router-dom";
 import {store} from "./redux/state";
 
-export let reRender = (state:any) => {
+export let reRender = (state: any) => {
     console.log(store.getState())
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>
                 <App
-                    onChangeMessageText={store.onChangeMessageText.bind(store)}
-                    state={store.getState()}
-                    addNewMessage={store.addNewMessage.bind(store)}
-                    changePostText={store.changePostText.bind(store)}
-                    addPost={store.addPost.bind(store)}/>
+                    state={store.getState()} dispatch={store.dispatch.bind(store)}
+                />
             </React.StrictMode>
         </BrowserRouter>,
         document.getElementById('root')

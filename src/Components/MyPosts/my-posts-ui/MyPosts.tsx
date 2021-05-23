@@ -1,20 +1,21 @@
 import React from "react";
 import s from './MyPosts.module.css'
 import {Post} from "../../Post/post-ui/Post";
-import {PostsPropsType} from "../../../redux/state";
+import {ActionType, addPostAC, changePostTextAC, PostsPropsType, store} from "../../../redux/state";
 
 
 type MyPostsPropsType = {
     posts: Array<PostsPropsType>
-    addPost: (postText: any) => void
-    newPostText:string
-    changePostText:(postText:any)=>void
+    newPostText: string
+    dispatch: (action: ActionType) => void
 }
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
     let getElementValue = React.createRef<HTMLTextAreaElement>()
-
+    const dispatch = (action: ActionType) => {
+        props.dispatch(action)
+    }
 
     /* let addPost = () => {
          alert(getElementValue.current?.value)
@@ -30,14 +31,14 @@ export const MyPosts = (props: MyPostsPropsType) => {
     }
 */
     let addPost = () => {
-        props.addPost(getElementValue.current?.value)
+        dispatch(addPostAC(getElementValue.current?.value))
     }
 
     /*let onChangePost=(e:ChangeEvent<HTMLTextAreaElement>)=>{
         props.changePostText(e.currentTarget.value)
     }*/
-    let onChangePost=()=>{
-        props.changePostText(getElementValue.current?.value)
+    let onChangePost = () => {
+        dispatch(changePostTextAC(getElementValue.current?.value))
     }
 
     return (

@@ -1,4 +1,4 @@
-import {ActionType, DialogsPageType} from "../../../redux/state";
+import {ActionType, DialogsPageType} from "../../../redux/store";
 
 
 const initialState:DialogsPageType={

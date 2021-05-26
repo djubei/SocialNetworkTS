@@ -8,7 +8,7 @@ import {Settings} from "./Components/Settings/settings-ui/Settings";
 import {Music} from "./Components/Music/music-ui/Music";
 import {News} from "./Components/News/news-ui/News";
 import {Dialogs} from "./Components/Dialogs/dialogs-ui/Dialogs";
-import {ActionType, DialogItemPropsType, MessagePropsType, PostsPropsType} from "./redux/state";
+import {ActionType, DialogItemPropsType, MessagePropsType, PostsPropsType} from "./redux/store";
 
 
 type AppPropsType = {

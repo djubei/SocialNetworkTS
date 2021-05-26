@@ -8,7 +8,7 @@ import {
     DialogItemPropsType,
     MessagePropsType,
     onChangeMessageTextAc
-} from "../../../redux/state";
+} from "../../../redux/store";
 
 
 type DialogsPropsType = {

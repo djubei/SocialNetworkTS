@@ -1,4 +1,4 @@
-import {ActionType, ProfilePageType} from "../../../redux/state";
+import {ActionType, ProfilePageType} from "../../../redux/store";
 
 
 const initialState: ProfilePageType =

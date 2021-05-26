@@ -1,3 +1,7 @@
+import {dialogsPageReducer} from "../Components/Dialogs/dialogs-bll/dialogPageReducer";
+import {profilePageReducer} from "../Components/Profile/profile-bll/profilePageReducer";
+import {sideBarReducer} from "../Components/SideBar/sideBar-bll/sideBarReducer";
+
 export type MessagePropsType = {
     id: number
     message: string
@@ -16,17 +20,20 @@ export type PostsPropsType = {
     likes: number
 }
 
-export type StateType = {
-    profilePage: {
-        posts: Array<PostsPropsType>
-        newPostText: string
+export type ProfilePageType = {
+    posts: PostsPropsType[]
+    newPostText: string
+}
+export type DialogsPageType = {
+    messages: MessagePropsType[]
+    dialogs: DialogItemPropsType[]
+    newMessageText: string
+}
 
-    }
-    dialogsPage: {
-        messages: MessagePropsType[]
-        dialogs: DialogItemPropsType[]
-        newMessageText: string
-    }
+export type StateType = {
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+    sideBar: {}
 }
 
 export let store = {
@@ -59,7 +66,8 @@ export let store = {
                 {id: 7, name: 'Eugene'},
             ],
             newMessageText: 'ok'
-        }
+        },
+        sideBar: {}
     } as StateType,
     getState() {
         return this._state
@@ -99,20 +107,15 @@ export let store = {
           this._callSubscriber()
       },*/
     dispatch(action: ActionType) {
-        switch (action.type) {
-            case 'ADD-POST':
-                this._state.profilePage.posts = [...this._state.profilePage.posts, {
-                    id: this._state.profilePage.posts[this._state.profilePage.posts.length - 1].id + 1,
-                    message: action.postText,
-                    likes: 0
-                }]
-                this._state.profilePage.newPostText = ''
-                this._callSubscriber()
-                break;
-            case 'CHANGE-POST-TEXT':
-                this._state.profilePage.newPostText = action.postText
-                this._callSubscriber()
-                break;
+
+
+        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action)
+        this._state.profilePage = profilePageReducer(this._state.profilePage, action)
+        this._state.sideBar = sideBarReducer(this._state.sideBar, action)
+
+        this._callSubscriber()
+
+        /*switch (action.type) {
             case 'ADD-NEW-MESSAGE':
                 this._state.dialogsPage.messages = [...this._state.dialogsPage.messages,
                     {
@@ -126,7 +129,20 @@ export let store = {
                 this._state.dialogsPage.newMessageText = action.newMessageText
                 this._callSubscriber()
                 break;
-        }
+            case 'ADD-POST':
+                this._state.profilePage.posts = [...this._state.profilePage.posts, {
+                    id: this._state.profilePage.posts[this._state.profilePage.posts.length - 1].id + 1,
+                    message: action.postText,
+                    likes: 0
+                }]
+                this._state.profilePage.newPostText = ''
+                this._callSubscriber()
+                break;
+            case 'CHANGE-POST-TEXT':
+                this._state.profilePage.newPostText = action.postText
+                this._callSubscriber()
+                break;
+        }*/
     }
 }
 
@@ -147,12 +163,10 @@ export const addNewMessageAC = () => {
         type: 'ADD-NEW-MESSAGE',
     } as const
 }
-export const onChangeMessageTextAc = (newMessageText: any) => {
-    return {
-        type: 'ON-CHANGE-MESSAGE-TEXT',
-        newMessageText
-    } as const
-}
+export const onChangeMessageTextAc = (newMessageText: any) => ({
+    type: 'ON-CHANGE-MESSAGE-TEXT',
+    newMessageText
+} as const)
 export type addPostACType = ReturnType<typeof addPostAC>
 export type changePostTextACType = ReturnType<typeof changePostTextAC>
 export type addNewMessageACType = ReturnType<typeof addNewMessageAC>

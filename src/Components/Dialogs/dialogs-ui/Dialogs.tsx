@@ -9,7 +9,6 @@ import {
     MessagePropsType,
     onChangeMessageTextAc
 } from "../../../redux/state";
-import {store} from "../../../redux/state";
 
 
 type DialogsPropsType = {
@@ -26,11 +25,11 @@ type DialogsPropsType = {
 export const Dialogs = (props: DialogsPropsType) => {
 
     const dispatch = (action: ActionType) => {
-        props.dispatch(action)
-    }
+        props.dispatch(action)}
 
     let getElement = React.createRef<HTMLTextAreaElement>()
     let addMessage = () => {
+
         dispatch(addNewMessageAC())
     }
     let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {

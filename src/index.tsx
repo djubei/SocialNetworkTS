@@ -4,15 +4,15 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {App} from "./App";
 import {BrowserRouter} from "react-router-dom";
-import {store} from "./redux/reduxStore";
+import {AppRootStateType, store} from "./redux/reduxStore";
 
-export let reRender = (state: any) => {
+export let reRender = (state: AppRootStateType) => {
     console.log(store)
     ReactDOM.render(
         <BrowserRouter>
             <React.StrictMode>
                 <App
-                    state={store.getState()} dispatch={store.dispatch.bind(store)}
+                    state={state} dispatch={store.dispatch.bind(store)}
                 />
             </React.StrictMode>
         </BrowserRouter>,

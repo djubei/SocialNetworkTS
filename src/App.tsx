@@ -8,23 +8,14 @@ import {Settings} from "./Components/Settings/settings-ui/Settings";
 import {Music} from "./Components/Music/music-ui/Music";
 import {News} from "./Components/News/news-ui/News";
 import {Dialogs} from "./Components/Dialogs/dialogs-ui/Dialogs";
-import {ActionType, DialogItemPropsType, MessagePropsType, PostsPropsType} from "./redux/store";
+import {Store} from 'redux';
+import {StoreStateType} from "./redux/store";
+import {DialogsContainer} from "./Components/Dialogs/dialogs-ui/DialogsContainer";
 
 
 type AppPropsType = {
-    state: {
-        profilePage: {
-            posts: Array<PostsPropsType>
-            newPostText: string
-
-        }
-        dialogsPage: {
-            messages: MessagePropsType[]
-            dialogs: DialogItemPropsType[]
-            newMessageText: string
-        }
-    }
-    dispatch: (action: ActionType) => void
+    store: Store
+    state: StoreStateType
 }
 
 export const App = (props: AppPropsType) => {
@@ -33,9 +24,9 @@ export const App = (props: AppPropsType) => {
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-                <Route path={'/profile'} render={() => <Profile dispatch={props.dispatch} profilePage={props.state.profilePage}/>}/>
+                <Route path={'/profile'} render={() => <Profile store={props.store}/>}/>
                 <Route /*exact*/ path={'/dialogs'}
-                                 render={() => <Dialogs dispatch={props.dispatch} state={props.state.dialogsPage}/>}/>
+                                 render={() => <DialogsContainer store={props.store}/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/news'} render={() => <News/>}/>

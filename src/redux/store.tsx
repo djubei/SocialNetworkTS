@@ -24,19 +24,28 @@ export type ProfilePageType = {
     posts: PostsPropsType[]
     newPostText: string
 }
+
+export type StoreStateType={
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
+    sideBar: {}
+}
+
 export type DialogsPageType = {
     messages: MessagePropsType[]
     dialogs: DialogItemPropsType[]
     newMessageText: string
 }
 
-export type StateType = {
-    profilePage: ProfilePageType
-    dialogsPage: DialogsPageType
-    sideBar: {}
+export type StoreType = {
+    _state: StoreStateType
+    getState: () => void
+    _callSubscriber: () => void
+    subscribe: (observer: any) => void
+    dispatch:(action:ActionType)=>void
 }
 
-export let store = {
+export let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -68,7 +77,7 @@ export let store = {
             newMessageText: 'ok'
         },
         sideBar: {}
-    } as StateType,
+    },
     getState() {
         return this._state
     },
@@ -114,7 +123,6 @@ export let store = {
         this._state.sideBar = sideBarReducer(this._state.sideBar, action)
 
         this._callSubscriber()
-
         /*switch (action.type) {
             case 'ADD-NEW-MESSAGE':
                 this._state.dialogsPage.messages = [...this._state.dialogsPage.messages,

@@ -12,7 +12,7 @@ export let reRender = (state: AppRootStateType) => {
         <BrowserRouter>
             <React.StrictMode>
                 <App
-                    state={state} dispatch={store.dispatch.bind(store)}
+                     store={store} state={state}
                 />
             </React.StrictMode>
         </BrowserRouter>,

@@ -2,52 +2,41 @@ import React, {ChangeEvent} from "react";
 import s from './Dialogs.module.css'
 import {DialogItem} from "../../DialogItem/dialogItem-ui/DialogItem";
 import {Message} from "../../Message/message-ui/Message";
-import {
-    ActionType,
-    addNewMessageAC,
-    DialogItemPropsType,
-    MessagePropsType,
-    onChangeMessageTextAc
-} from "../../../redux/store";
+import {DialogItemPropsType, MessagePropsType} from "../../../redux/store";
 
 
 type DialogsPropsType = {
-    state: {
-        dialogs: Array<DialogItemPropsType>
-        messages: Array<MessagePropsType>
-        newMessageText: string
-    }
-    dispatch: (action: ActionType) => void
-
+    onChangeMessage: (text: string) => void
+    addMessage: () => void
+    dialogs: DialogItemPropsType[]
+    messages: MessagePropsType[]
+    newMessageText: string
 }
-
 
 export const Dialogs = (props: DialogsPropsType) => {
 
-    const dispatch = (action: ActionType) => {
-        props.dispatch(action)}
+    /*let getElement = React.createRef<HTMLTextAreaElement>()*/
 
-    let getElement = React.createRef<HTMLTextAreaElement>()
-    let addMessage = () => {
-
-        dispatch(addNewMessageAC())
+    const addMessage = () => {
+        props.addMessage()
     }
-    let onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(onChangeMessageTextAc(e.currentTarget.value))
+    const onChangeMessage = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.onChangeMessage(e.currentTarget.value)
     }
 
     return (
 
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                {props.state.dialogs.map(t => <DialogItem key={t.id} id={t.id} name={t.name}/>)}
+                {props.dialogs.map(t => <DialogItem key={t.id} id={t.id} name={t.name}/>)}
             </div>
             <div className={s.messages}>
                 <div className={s.textarea}>
-                    <textarea value={props.state.newMessageText} onChange={onChangeMessage} ref={getElement}></textarea>
+                    <textarea value={props.newMessageText} onChange={onChangeMessage}
+                        /*ref={getElement}*//>
                     <button onClick={addMessage}>AddComment</button>
                 </div>
-                {props.state.messages.map(t => <Message key={t.id} id={t.id} message={t.message}/>)}
+                {props.messages.map(t => <Message key={t.id} id={t.id} message={t.message}/>)}
             </div>
         </div>
     )

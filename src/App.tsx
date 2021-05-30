@@ -23,9 +23,9 @@ export const App = (props: AppPropsType) => {
             <Header/>
             <Navbar/>
             <div className={'app-wrapper-content'}>
-                <Route path={'/profile'} render={() => <Profile store={props.store}/>}/>
+                <Route path={'/profile'} render={() => <Profile/>}/>
                 <Route /*exact*/ path={'/dialogs'}
-                                 render={() => <DialogsContainer store={props.store}/>}/>
+                                 render={() => <DialogsContainer />}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/news'} render={() => <News/>}/>

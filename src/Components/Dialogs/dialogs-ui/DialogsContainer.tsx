@@ -1,9 +1,17 @@
 import React from "react";
-import {ActionType, addNewMessageAC, onChangeMessageTextAc, StoreStateType} from "../../../redux/store";
-import {Store} from "redux";
+import {
+    ActionType,
+    addNewMessageAC, DialogItemPropsType,
+    MessagePropsType,
+    onChangeMessageTextAc,
+    StoreStateType
+} from "../../../redux/store";
+import {Dispatch, Store} from "redux";
 import {Dialogs} from "./Dialogs";
+import {connect} from "react-redux";
 
 
+/*
 type DialogsPropsType = {
     store: Store
 }
@@ -17,7 +25,7 @@ export const DialogsContainer = (props: DialogsPropsType) => {
         props.store.dispatch(action)
     }
 
-    /* const getElement = React.createRef<HTMLTextAreaElement>()*/
+    /!* const getElement = React.createRef<HTMLTextAreaElement>()*!/
 
     const addMessage = () => {
         dispatch(addNewMessageAC())
@@ -37,4 +45,31 @@ export const DialogsContainer = (props: DialogsPropsType) => {
                     )
 
 
+}*/
+
+type MapStateToPropsType = {
+    messages: MessagePropsType[]
+    dialogs: DialogItemPropsType[]
+    newMessageText: string
 }
+type MapDispatchToPropsType = {
+    onChangeMessage: (text: string) => void,
+    addMessage: () => void
+}
+
+const MapStateToProps = (state: StoreStateType): MapStateToPropsType => {
+    return {
+        dialogs: state.dialogsPage.dialogs,
+        messages: state.dialogsPage.messages,
+        newMessageText: state.dialogsPage.newMessageText
+    }
+}
+
+const MapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+    return {
+        onChangeMessage: (text: string) => dispatch(onChangeMessageTextAc(text)),
+        addMessage: () => dispatch(addNewMessageAC())
+    }
+}
+
+export const DialogsContainer= connect<MapStateToPropsType,MapDispatchToPropsType,{},StoreStateType>(MapStateToProps,MapDispatchToProps)(Dialogs)

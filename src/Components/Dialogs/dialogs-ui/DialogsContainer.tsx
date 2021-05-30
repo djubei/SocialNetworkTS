@@ -2,7 +2,6 @@ import React from "react";
 import {ActionType, addNewMessageAC, onChangeMessageTextAc, StoreStateType} from "../../../redux/store";
 import {Store} from "redux";
 import {Dialogs} from "./Dialogs";
-import {StoreContext} from "../../../Store/StoreContext";
 
 
 type DialogsPropsType = {
@@ -12,13 +11,13 @@ type DialogsPropsType = {
 
 export const DialogsContainer = (props: DialogsPropsType) => {
 
-    /*let state: StoreStateType = props.store.getState()
+    let state: StoreStateType = props.store.getState()
 
     const dispatch = (action: ActionType) => {
         props.store.dispatch(action)
     }
 
-    /!* const getElement = React.createRef<HTMLTextAreaElement>()*!/
+    /* const getElement = React.createRef<HTMLTextAreaElement>()*/
 
     const addMessage = () => {
         dispatch(addNewMessageAC())
@@ -27,22 +26,7 @@ export const DialogsContainer = (props: DialogsPropsType) => {
     const onChangeMessage = (text: string) => {
         dispatch(onChangeMessageTextAc(text))
     }
-*/
-    return (
-        <StoreContext.Consumer>
-            {
-                value => {
-                    let state: StoreStateType = value.getState()
 
-                    const dispatch = (action: ActionType) => {
-                        value.dispatch(action)
-                    }
-                    const addMessage = () => {
-                        dispatch(addNewMessageAC())
-                    }
-                    const onChangeMessage = (text: string) => {
-                        dispatch(onChangeMessageTextAc(text))
-                    }
                     return (
                         <Dialogs
                             onChangeMessage={onChangeMessage}
@@ -51,7 +35,6 @@ export const DialogsContainer = (props: DialogsPropsType) => {
                             messages={state.dialogsPage.messages}
                             newMessageText={state.dialogsPage.newMessageText}/>
                     )
-                }}
-        </StoreContext.Consumer>
-    )
+
+
 }

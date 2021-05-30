@@ -1,8 +1,7 @@
 import React from "react";
-import {ActionType, addPostAC, changePostTextAC, StoreStateType} from "../../../redux/store";
+import {ActionType, addPostAC, changePostTextAC} from "../../../redux/store";
 import {MyPosts} from "./MyPosts";
 import {Store} from "redux";
-import {StoreContext} from "../../../Store/StoreContext";
 
 
 type MyPostsPropsType = {
@@ -10,61 +9,42 @@ type MyPostsPropsType = {
 }
 
 export const MyPostsContainer = (props: MyPostsPropsType) => {
-/*
-    let state = props.store.getState()
+        let state = props.store.getState()
 
-    /!*let getElementValue = React.createRef<HTMLTextAreaElement>()*!/
-    const dispatch = (action: ActionType) => {
-        props.store.dispatch(action)
-    }
+        /*let getElementValue = React.createRef<HTMLTextAreaElement>()*/
+        const dispatch = (action: ActionType) => {
+            props.store.dispatch(action)
+        }
 
-    /!* let addPost = () => {
-         alert(getElementValue.current?.value)
-     }*!/
-    /!*let a = ''
-    let setPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        a = e.currentTarget?.value
-        return a
-    }
-    let addPost = () => {
-        alert(a)
-    }
-*!/
-    let addPost = (text: any) => {
-        dispatch(addPostAC(text))
-    }
+        /* let addPost = () => {
+             alert(getElementValue.current?.value)
+         }*/
+        /*let a = ''
+        let setPost = (e: ChangeEvent<HTMLTextAreaElement>) => {
+            a = e.currentTarget?.value
+            return a
+        }
+        let addPost = () => {
+            alert(a)
+        }
+    */
+        let addPost = (text: any) => {
+            dispatch(addPostAC(text))
+        }
 
-    /!*let onChangePost=(e:ChangeEvent<HTMLTextAreaElement>)=>{
-        props.changePostText(e.currentTarget.value)
-    }*!/
-    let onChangePost = (text: any) => {
-        dispatch(changePostTextAC(text))
-    }*/
+        /*let onChangePost=(e:ChangeEvent<HTMLTextAreaElement>)=>{
+            props.changePostText(e.currentTarget.value)
+        }*/
+        let onChangePost = (text: any) => {
+            dispatch(changePostTextAC(text))
+        }
+
 
     return (
-        <StoreContext.Consumer>
-            {
-                (value) => {
+        <MyPosts posts={state.profilePage.posts} newPostText={state.profilePage.newPostText}
+                 addPost={addPost} onChangePost={onChangePost}/>
 
-                    let state:StoreStateType=value.getState()
-
-                    const dispatch = (action: ActionType) => {
-                        value.dispatch(action)
-                    }
-                    const addPost = (text: any) => {
-                        dispatch(addPostAC(text))
-                    }
-                    const onChangePost = (text: any) => {
-                        dispatch(changePostTextAC(text))
-                    }
-
-                    return (
-                        <MyPosts posts={state.profilePage.posts} newPostText={state.profilePage.newPostText}
-                                 addPost={addPost} onChangePost={onChangePost}/>
-
-                    )
-                }
-            }
-        </StoreContext.Consumer>
     )
+
+
 }

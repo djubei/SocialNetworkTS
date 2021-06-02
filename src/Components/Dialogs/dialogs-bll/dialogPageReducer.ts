@@ -1,7 +1,7 @@
 import {ActionType, DialogsPageType} from "../../../redux/store";
 
 
-const initialState:DialogsPageType={
+const initialState: DialogsPageType = {
     messages: [
         {id: 1, message: 'hi'},
         {id: 2, message: 'bye'},
@@ -21,19 +21,19 @@ const initialState:DialogsPageType={
     newMessageText: 'ok'
 }
 
-export const dialogsPageReducer = (state: DialogsPageType=initialState, action: ActionType) => {
+export const dialogsPageReducer = (state: DialogsPageType = initialState, action: ActionType) => {
     switch (action.type) {
         case 'ADD-NEW-MESSAGE':
-          const stateCopy=  state.messages = [...state.messages,
-                {
+            return {
+                ...state, messages: [...state.messages, {
                     id: state.messages[state.messages.length - 1].id + 1,
                     message: state.newMessageText
-                }]
-            state.newMessageText = ''
-            return {...state,messages:stateCopy}
+                }], newMessageText: ''
+            }
+
         case 'ON-CHANGE-MESSAGE-TEXT':
             return {...state, newMessageText: action.newMessageText}
         default:
-            return {...state}
+            return state
     }
 }

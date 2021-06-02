@@ -8,13 +8,11 @@ import {Settings} from "./Components/Settings/settings-ui/Settings";
 import {Music} from "./Components/Music/music-ui/Music";
 import {News} from "./Components/News/news-ui/News";
 import {Store} from 'redux';
-import {StoreStateType} from "./redux/store";
 import {DialogsContainer} from "./Components/Dialogs/dialogs-ui/DialogsContainer";
 
 
 type AppPropsType = {
-    store: Store
-    state: StoreStateType
+
 }
 
 export const App = (props: AppPropsType) => {

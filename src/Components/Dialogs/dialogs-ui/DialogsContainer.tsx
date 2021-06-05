@@ -1,12 +1,12 @@
 import React from "react";
 import {
-    ActionType,
-    addNewMessageAC, DialogItemPropsType,
+    addNewMessageAC,
+    DialogItemPropsType,
     MessagePropsType,
     onChangeMessageTextAc,
     StoreStateType
 } from "../../../redux/store";
-import {Dispatch, Store} from "redux";
+import {Dispatch} from "redux";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 

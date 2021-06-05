@@ -1,6 +1,12 @@
 import {dialogsPageReducer} from "../Components/Dialogs/dialogs-bll/dialogPageReducer";
 import {profilePageReducer} from "../Components/Profile/profile-bll/profilePageReducer";
 import {sideBarReducer} from "../Components/SideBar/sideBar-bll/sideBarReducer";
+import {
+    FollowACType,
+    SetUsersACType,
+    UnfollowACType,
+    UsersStateType
+} from "../Components/Users/users-bll/users-reducer";
 
 export type MessagePropsType = {
     id: number
@@ -25,10 +31,11 @@ export type ProfilePageType = {
     newPostText: string
 }
 
-export type StoreStateType={
+export type StoreStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sideBar: {}
+    usersPage: UsersStateType
 }
 
 export type DialogsPageType = {
@@ -42,10 +49,10 @@ export type StoreType = {
     getState: () => void
     _callSubscriber: () => void
     subscribe: (observer: any) => void
-    dispatch:(action:ActionType)=>void
+    dispatch: (action: ActionType) => void
 }
 
-export let store: StoreType = {
+export let store = {
     _state: {
         profilePage: {
             posts: [
@@ -186,6 +193,9 @@ export type ActionType =
     | changePostTextACType
     | addNewMessageACType
     | onChangeMessageTextAcType
+    | FollowACType
+    | UnfollowACType
+    | SetUsersACType
 
 
 //@ts-ignore

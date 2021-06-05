@@ -9,11 +9,11 @@ import {Music} from "./Components/Music/music-ui/Music";
 import {News} from "./Components/News/news-ui/News";
 import {Store} from 'redux';
 import {DialogsContainer} from "./Components/Dialogs/dialogs-ui/DialogsContainer";
+import {Users} from "./Components/Users/users-ui/Users";
+import {UsersContainer} from "./Components/Users/users-ui/Users-Container";
 
 
-type AppPropsType = {
-
-}
+type AppPropsType = {}
 
 export const App = (props: AppPropsType) => {
     return (
@@ -23,10 +23,11 @@ export const App = (props: AppPropsType) => {
             <div className={'app-wrapper-content'}>
                 <Route path={'/profile'} render={() => <Profile/>}/>
                 <Route /*exact*/ path={'/dialogs'}
-                                 render={() => <DialogsContainer />}/>
+                                 render={() => <DialogsContainer/>}/>
                 <Route path={'/settings'} render={() => <Settings/>}/>
                 <Route path={'/music'} render={() => <Music/>}/>
                 <Route path={'/news'} render={() => <News/>}/>
+                <Route path={'/users'} render={() => <UsersContainer/>}/>
             </div>
         </div>
     )

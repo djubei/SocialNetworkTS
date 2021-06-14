@@ -7,9 +7,7 @@ import {Profile} from './Components/Profile/profile-ui/Profile';
 import {Settings} from "./Components/Settings/settings-ui/Settings";
 import {Music} from "./Components/Music/music-ui/Music";
 import {News} from "./Components/News/news-ui/News";
-import {Store} from 'redux';
 import {DialogsContainer} from "./Components/Dialogs/dialogs-ui/DialogsContainer";
-import {Users} from "./Components/Users/users-ui/Users";
 import {UsersContainer} from "./Components/Users/users-ui/Users-Container";
 
 

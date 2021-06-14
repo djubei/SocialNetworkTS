@@ -13,19 +13,22 @@ type UsersPropsType = {
 
 export const Users = (props: UsersPropsType) => {
 
-
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
-            console.log(response.data.items)
-            props.setUsers(response.data.items)
-        })
+    const getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
+                console.log(response.data.items)
+                props.setUsers(response.data.items)
+            })
+        }
     }
 
-
     return (
+
         <div>
-            {props.users.map(t => <div key={t.id}>
-                <div>
+            <button onClick={getUsers}>Get Users</button>
+            <div>
+                {props.users.map(t => <div key={t.id}>
+                    <div>
                     <span>
                         <div>
                             <img style={{width: 115, height: 105}}
@@ -41,7 +44,7 @@ export const Users = (props: UsersPropsType) => {
                                 }} style={{backgroundColor: "aquamarine"}}>follow</button>}
                         </div>
                     </span>
-                    <span>
+                        <span>
                         <span>
                             <div>{t.name}</div><div>{t.status}</div>
                         </span>
@@ -49,8 +52,9 @@ export const Users = (props: UsersPropsType) => {
                             <div>{'t.location.city'}</div><div>{'t.location.country'}</div>
                         </span>
                     </span>
-                </div>
-            </div>)}
+                    </div>
+                </div>)}
+            </div>
         </div>
     )
 }

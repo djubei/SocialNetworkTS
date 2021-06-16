@@ -10,8 +10,58 @@ type UsersPropsType = {
     unfollow: (id: number) => void
 }
 
+export class Users extends React.Component<UsersPropsType, {}> {
+    constructor(props: any) {
+        super(props);
 
-export const Users = (props: UsersPropsType) => {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
+                console.log(response.data.items)
+                this.props.setUsers(response.data.items)
+            }
+        )
+
+    }
+
+    render() {
+
+        return (
+            <div>
+                <div>
+                    {this.props.users.map(t => <div key={t.id}>
+                        <div>
+                    <span>
+                        <div>
+                            <img style={{width: 115, height: 105}}
+                                 src={t.photos.large != null ? t.photos.large : image}
+                                 alt="zx"/>
+                        </div>
+                        <div>
+                            {t.followed ? <button onClick={() => {
+                                    this.props.unfollow(t.id)
+                                }} style={{backgroundColor: 'red'}}>Unfollow</button> :
+                                <button onClick={() => {
+                                    this.props.follow(t.id)
+                                }} style={{backgroundColor: "aquamarine"}}>follow</button>}
+                        </div>
+                    </span>
+                            <span>
+                        <span>
+                            <div>{t.name}</div><div>{t.status}</div>
+                        </span>
+                        <span>
+                            <div>{'t.location.city'}</div><div>{'t.location.country'}</div>
+                        </span>
+                    </span>
+                        </div>
+                    </div>)}
+                </div>
+            </div>
+        )
+    }
+}
+
+
+/*export const Users = (props: UsersPropsType) => {
 
     const getUsers = () => {
         if (props.users.length === 0) {
@@ -57,7 +107,7 @@ export const Users = (props: UsersPropsType) => {
             </div>
         </div>
     )
-}
+}*/
 
 /*
 if (props.users.length===0){

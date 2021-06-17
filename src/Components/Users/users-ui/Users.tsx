@@ -2,6 +2,7 @@ import React from "react";
 import {UserType} from "../users-bll/users-reducer";
 import axios from "axios";
 import image from '../../../assets/images/1_6d98de9d.jpg';
+import {v1} from "uuid";
 
 type UsersPropsType = {
     users: UserType[]
@@ -13,21 +14,28 @@ type UsersPropsType = {
 export class Users extends React.Component<UsersPropsType, {}> {
     constructor(props: any) {
         super(props);
+    }
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((response) => {
+    componentDidMount() {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users?page=1&count=2').then((response) => {
                 console.log(response.data.items)
                 this.props.setUsers(response.data.items)
             }
         )
-
     }
 
     render() {
-
         return (
             <div>
                 <div>
-                    {this.props.users.map(t => <div key={t.id}>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
+                <div>
+                    {this.props.users.map(t => <div key={v1()}>
                         <div>
                     <span>
                         <div>

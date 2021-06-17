@@ -72,4 +72,4 @@ const MapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-export const DialogsContainer= connect<MapStateToPropsType,MapDispatchToPropsType,{},StoreStateType>(MapStateToProps,MapDispatchToProps)(Dialogs)
+export const DialogsContainer = connect<MapStateToPropsType, MapDispatchToPropsType, {}, StoreStateType>(MapStateToProps, MapDispatchToProps)(Dialogs)

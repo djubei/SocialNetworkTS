@@ -3,10 +3,13 @@ import {profilePageReducer} from "../Components/Profile/profile-bll/profilePageR
 import {sideBarReducer} from "../Components/SideBar/sideBar-bll/sideBarReducer";
 import {
     FollowACType,
+    SetCurrentPageType, SetLoadingStatusACType,
+    SetTotalUsersCountACType,
     SetUsersACType,
     UnfollowACType,
     UsersStateType
 } from "../Components/Users/users-bll/users-reducer";
+
 
 export type MessagePropsType = {
     id: number
@@ -196,6 +199,10 @@ export type ActionType =
     | FollowACType
     | UnfollowACType
     | SetUsersACType
+    | SetCurrentPageType
+    | SetTotalUsersCountACType
+    | SetLoadingStatusACType
+
 
 
 //@ts-ignore

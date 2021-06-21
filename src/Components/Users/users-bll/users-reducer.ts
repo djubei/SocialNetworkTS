@@ -7,7 +7,7 @@ export type LocationType = {
 
 export type UserType = {
     id: number
-    photos:PhotoType
+    photos: PhotoType
     followed: boolean
     name: string
     status: string
@@ -20,6 +20,10 @@ export type PhotoType = {
 
 export type UsersStateType = {
     users: Array<UserType>
+    pageSize: number,
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
 }
 
 const initialState: UsersStateType = {
@@ -49,6 +53,10 @@ const initialState: UsersStateType = {
             location: {country: 'Ukraine', city: 'Kiev'}
         },*/
     ],
+    pageSize: 5,
+    totalUsersCount: 9,
+    currentPage: 1,
+    isFetching: false
 }
 
 
@@ -71,7 +79,13 @@ export let usersReducer = (state: UsersStateType = initialState, action: ActionT
                 users: state.users.map(t => t.id === action.id ? {...t, followed: false} : {...t})
             }
         case "SET-USERS":
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: [...action.users]}
+        case "SET-CURRENT-PAGE":
+            return {...state, currentPage: action.pageNumber}
+        case "SET-TOTAL-USERS-COUNT":
+            return {...state, totalUsersCount: action.totalUsersCount}
+        case 'SET-LOADING-STATUS':
+            return {...state, isFetching: action.status}
         default:
             return state
     }
@@ -84,6 +98,22 @@ export const followAC = (id: number) => {
     } as const
 }
 export type FollowACType = ReturnType<typeof followAC>
+
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+    return {
+        type: 'SET-TOTAL-USERS-COUNT',
+        totalUsersCount
+    } as const
+}
+export type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>
+
+export const setCurrentPageAC = (pageNumber: number) => {
+    return {
+        type: "SET-CURRENT-PAGE",
+        pageNumber
+    } as const
+}
+export type SetCurrentPageType = ReturnType<typeof setCurrentPageAC>
 
 export const unfollowAC = (id: number) => {
     return {
@@ -101,3 +131,11 @@ export const setUsersAC = (users: Array<UserType>) => {
     } as const
 }
 export type SetUsersACType = ReturnType<typeof setUsersAC>
+
+export const setLoadingStatusAC = (status: boolean) => {
+    return {
+        type: 'SET-LOADING-STATUS',
+        status
+    } as const
+}
+export type SetLoadingStatusACType = ReturnType<typeof setLoadingStatusAC>
